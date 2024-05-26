@@ -1,10 +1,13 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
 // Proxy request to backend
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   const { method, body } = req
 
-  const backendUrl = 'http://backend:5000/shorten' // URL to the backend service
+  const backendUrl = process.env.API_URL + '/shorten' // URL to the backend service
 
   if (method === 'POST') {
     try {

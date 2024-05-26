@@ -1,4 +1,4 @@
-"use client";
+'use client'
 
 import { useState } from 'react'
 
@@ -47,7 +47,10 @@ export default function Home() {
     <main className="flex min-h-screen flex-col items-center justify-center p-24">
       <h1 className="text-4xl font-bold mb-8">Shortify</h1>
       {!shortUrl ? (
-        <form onSubmit={handleSubmit} className="w-full max-w-md flex flex-col items-center">
+        <form
+          onSubmit={handleSubmit}
+          className="w-full max-w-md flex flex-col items-center"
+        >
           <input
             type="url"
             value={longUrl}
