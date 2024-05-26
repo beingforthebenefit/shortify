@@ -7,7 +7,7 @@ export default async function handler(
 ) {
   const { method, body } = req
 
-  const backendUrl = process.env.API_URL + '/shorten' // URL to the backend service
+  const backendUrl = process.env.NEXT_PUBLIC_API_URL + '/shorten'
 
   if (method === 'POST') {
     try {
