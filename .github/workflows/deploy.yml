@@ -31,7 +31,7 @@ jobs:
 
       - name: Deploy backend
         run: |
-          aws ecs update-service --region ${{ secrets.AWS_REGION }} --cluster my-cluster --service my-backend-service --force-new-deployment
+          aws ecs update-service --region ${{ secrets.AWS_REGION }} --cluster shortify-cluster --service shortify-service --force-new-deployment
 
   deploy-frontend:
     runs-on: ubuntu-latest
@@ -59,4 +59,4 @@ jobs:
 
       - name: Deploy frontend
         run: |
-          aws ecs update-service --region ${{ secrets.AWS_REGION }} --cluster my-cluster --service my-frontend-service --force-new-deployment
+          aws ecs update-service --region ${{ secrets.AWS_REGION }} --cluster shortify-cluster --service shortify-service --force-new-deployment
