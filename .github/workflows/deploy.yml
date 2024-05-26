@@ -1,0 +1,48 @@
+name: Deploy to AWS
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy-backend:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Log in to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Build, tag, and push backend image
+        run: |
+          docker build -t ${{ secrets.ECR_REPOSITORY_URI_BACKEND }}:latest -f backend/Dockerfile ./backend
+          docker push ${{ secrets.ECR_REPOSITORY_URI_BACKEND }}:latest
+
+      - name: Deploy backend
+        run: |
+          aws ecs update-service --cluster my-cluster --service my-backend-service --force-new-deployment
+
+  deploy-frontend:
+    runs-on: ubuntu-latest
+    needs: deploy-backend
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Log in to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Build, tag, and push frontend image
+        run: |
+          docker build -t ${{ secrets.ECR_REPOSITORY_URI_FRONTEND }}:latest -f frontend/Dockerfile ./frontend
+          docker push ${{ secrets.ECR_REPOSITORY_URI_FRONTEND }}:latest
+
+      - name: Deploy frontend
+        run: |
+          aws ecs update-service --cluster my-cluster --service my-frontend-service --force-new-deployment
