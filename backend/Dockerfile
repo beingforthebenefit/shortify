@@ -19,6 +19,9 @@ COPY . .
 # Generate Prisma Client
 RUN npx prisma generate
 
+# Run Prisma migrations
+RUN npx prisma migrate deploy
+
 # Run linting and formatting checks
 RUN npm run lint:fix
 RUN npm run format
