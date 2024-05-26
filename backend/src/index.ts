@@ -16,7 +16,7 @@ app.get('/', (req, res) => {
 
 app.post('/shorten', async (req, res) => {
   const { longUrl } = req.body
-  const shortUrl = generateShortUrl() // Implement this function
+  const shortUrl = generateShortUrl()
   const newUrl = await prisma.url.create({
     data: { longUrl, shortUrl },
   })
@@ -29,7 +29,7 @@ app.get('/:shortUrl', async (req, res) => {
     where: { shortUrl },
   })
   if (url) {
-    res.redirect(url.longUrl)
+    res.json({ longUrl: url.longUrl })
   } else {
     res.status(404).send('URL not found')
   }
