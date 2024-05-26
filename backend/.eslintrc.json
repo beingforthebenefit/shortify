@@ -25,6 +25,7 @@
         "endOfLine": "auto"
       }
     ],
+    "constructor-super": "error",
     "@typescript-eslint/explicit-module-boundary-types": "off"
   }
 }
