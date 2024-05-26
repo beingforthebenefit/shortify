@@ -8,10 +8,14 @@ WORKDIR /app
 COPY package*.json ./
 
 # Install dependencies
-RUN npm install
+RUN npm install --legacy-peer-deps
 
 # Copy the rest of the application code
 COPY . .
+
+# Run linting and formatting checks
+# RUN npm run lint:fix
+# RUN npm run format
 
 # Build the Next.js application
 RUN npm run build
