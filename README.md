@@ -36,19 +36,19 @@ Shortify is a URL shortening service built with a modern tech stack including Ne
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/your-username/shortify.git
+   git clone https://github.com/beingforthebenefit/shortify.git
    cd shortify
    ```
 
 2. Install dependencies for both backend and frontend:
 
-  ```bash
-  cd backend
-  npm install
-  cd ../frontend
-  npm install
-  cd ..
-  ```
+    ```bash
+    cd backend
+    npm install
+    cd ../frontend
+    npm install
+    cd ..
+    ```
 
 ## Running Locally
 
