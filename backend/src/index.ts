@@ -1,7 +1,7 @@
 import express from 'express'
 import bodyParser from 'body-parser'
 import cors from 'cors'
-import { PrismaClient } from '@prisma/client'
+import {PrismaClient} from '@prisma/client'
 
 const app = express()
 const PORT = process.env.PORT || 5000
@@ -15,21 +15,21 @@ app.get('/', (req, res) => {
 })
 
 app.post('/shorten', async (req, res) => {
-  const { longUrl } = req.body
+  const {longUrl} = req.body
   const shortUrl = generateShortUrl()
   const newUrl = await prisma.url.create({
-    data: { longUrl, shortUrl },
+    data: {longUrl, shortUrl},
   })
   res.json(newUrl)
 })
 
 app.get('/:shortUrl', async (req, res) => {
-  const { shortUrl } = req.params
+  const {shortUrl} = req.params
   const url = await prisma.url.findUnique({
-    where: { shortUrl },
+    where: {shortUrl},
   })
   if (url) {
-    res.json({ longUrl: url.longUrl })
+    res.json({longUrl: url.longUrl})
   } else {
     res.status(404).send('URL not found')
   }
