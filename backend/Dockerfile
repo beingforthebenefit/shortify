@@ -20,7 +20,7 @@ COPY . .
 RUN npx prisma generate
 
 # Migrate the database
-RUN npx prisma migrate dev --name init
+# RUN npx prisma migrate dev --name init
 
 # Run linting and formatting checks
 RUN npm run lint:fix
