@@ -16,6 +16,7 @@ Shortify is a URL shortening service built with a modern tech stack including Ne
 
 - Shorten long URLs
 - Copy shortened URLs to clipboard
+- Generate QR code for shortened URLs
 - Redirect to the original URL when accessing the shortened URL
 
 ## Tech Stack
