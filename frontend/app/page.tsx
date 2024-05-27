@@ -1,7 +1,7 @@
 'use client'
 
-import { useState } from 'react'
-import { QRCodeCanvas } from 'qrcode.react'
+import {useState} from 'react'
+import {QRCodeCanvas} from 'qrcode.react'
 
 export default function Home() {
   const [longUrl, setLongUrl] = useState('')
@@ -21,8 +21,8 @@ export default function Home() {
     try {
       const res = await fetch('/api/shorten', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ longUrl }),
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({longUrl}),
       })
 
       if (!res.ok) {

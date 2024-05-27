@@ -1,11 +1,11 @@
-import { GetServerSideProps } from 'next'
-import { useEffect } from 'react'
+import {GetServerSideProps} from 'next'
+import {useEffect} from 'react'
 
 interface RedirectPageProps {
   longUrl: string
 }
 
-const RedirectPage = ({ longUrl }: RedirectPageProps) => {
+const RedirectPage = ({longUrl}: RedirectPageProps) => {
   useEffect(() => {
     if (longUrl) {
       window.location.href = longUrl
@@ -16,7 +16,7 @@ const RedirectPage = ({ longUrl }: RedirectPageProps) => {
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { shortUrl } = context.params as { shortUrl: string }
+  const {shortUrl} = context.params as {shortUrl: string}
   const backendUrl = `http://backend:5000/${shortUrl}`
 
   const res = await fetch(backendUrl)

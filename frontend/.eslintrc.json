@@ -26,7 +26,8 @@
         "singleQuote": true,
         "printWidth": 80,
         "trailingComma": "es5",
-        "endOfLine": "auto"
+        "endOfLine": "auto",
+        "bracketSpacing": false
       }
     ],
     "react-hooks/rules-of-hooks": "error",
