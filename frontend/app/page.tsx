@@ -1,17 +1,22 @@
 'use client'
 
 import { useState } from 'react'
+import { QRCodeCanvas } from 'qrcode.react'
 
 export default function Home() {
   const [longUrl, setLongUrl] = useState('')
   const [shortUrl, setShortUrl] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+  const [copied, setCopied] = useState(false)
+  const [showQRCode, setShowQRCode] = useState(false)
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setLoading(true)
     setError('')
+    setCopied(false)
+    setShowQRCode(false)
 
     try {
       const res = await fetch('/api/shorten', {
@@ -35,12 +40,16 @@ export default function Home() {
 
   const handleCopy = () => {
     navigator.clipboard.writeText(shortUrl)
+    setCopied(true)
+    setTimeout(() => setCopied(false), 2000)
   }
 
   const resetForm = () => {
     setLongUrl('')
     setShortUrl('')
     setError('')
+    setCopied(false)
+    setShowQRCode(false)
   }
 
   return (
@@ -80,9 +89,20 @@ export default function Home() {
               onClick={handleCopy}
               className="bg-green-500 text-white py-2 px-4 rounded"
             >
-              Copy
+              {copied ? '✓' : 'Copy'}
             </button>
           </div>
+          <button
+            onClick={() => setShowQRCode(!showQRCode)}
+            className="mt-4 bg-yellow-500 text-white py-2 px-4 rounded"
+          >
+            {showQRCode ? 'Hide QR Code' : 'Show QR Code'}
+          </button>
+          {showQRCode && (
+            <div className="mt-4">
+              <QRCodeCanvas value={shortUrl} />
+            </div>
+          )}
           <button
             onClick={resetForm}
             className="mt-4 bg-blue-500 text-white py-2 px-4 rounded"
