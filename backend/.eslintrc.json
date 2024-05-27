@@ -25,6 +25,7 @@
         "endOfLine": "auto"
       }
     ],
+    "object-curly-spacing": ["error", "never"],
     "@typescript-eslint/explicit-module-boundary-types": "off"
   }
 }
