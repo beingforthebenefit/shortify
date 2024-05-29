@@ -10,6 +10,9 @@ export default function Home() {
   const [error, setError] = useState('')
   const [copied, setCopied] = useState(false)
   const [showQRCode, setShowQRCode] = useState(false)
+  const [qrSize, setQrSize] = useState(128)
+  const [qrBgColor, setQrBgColor] = useState('#ffffff')
+  const [qrFgColor, setQrFgColor] = useState('#000000')
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -99,8 +102,44 @@ export default function Home() {
             {showQRCode ? 'Hide QR Code' : 'Show QR Code'}
           </button>
           {showQRCode && (
-            <div className="mt-4">
-              <QRCodeCanvas value={shortUrl} />
+            <div className="mt-4 flex flex-col items-center">
+              <QRCodeCanvas
+                value={shortUrl}
+                size={qrSize}
+                bgColor={qrBgColor}
+                fgColor={qrFgColor}
+              />
+              <div className="mt-4 flex flex-col items-center">
+                <label className="mb-2">
+                  Size:
+                  <input
+                    type="number"
+                    value={qrSize}
+                    onChange={(e) => setQrSize(Number(e.target.value))}
+                    className="ml-2 p-1 border border-gray-300 rounded text-black"
+                    min="64"
+                    max="512"
+                  />
+                </label>
+                <label className="mb-2">
+                  Background Color:
+                  <input
+                    type="color"
+                    value={qrBgColor}
+                    onChange={(e) => setQrBgColor(e.target.value)}
+                    className="ml-2 p-1 border border-gray-300 rounded"
+                  />
+                </label>
+                <label className="mb-2">
+                  Foreground Color:
+                  <input
+                    type="color"
+                    value={qrFgColor}
+                    onChange={(e) => setQrFgColor(e.target.value)}
+                    className="ml-2 p-1 border border-gray-300 rounded"
+                  />
+                </label>
+              </div>
             </div>
           )}
           <button
